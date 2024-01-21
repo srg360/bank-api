@@ -19,6 +19,7 @@ import com.app.service.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/customer")
@@ -31,7 +32,7 @@ public class CustomerController {
 	@Operation(summary = "Account Creation",description = "Creating a new customer account and assigning new 10 digits account number")
 	@ApiResponse(responseCode = "201",description = "Http status: CREATED")
 	@PostMapping
-	protected ResponseEntity<BankResponse> createAccount(@RequestBody CustomerRequest customerRequest) {
+	protected ResponseEntity<BankResponse> createAccount(@Valid @RequestBody CustomerRequest customerRequest) {
 		return new ResponseEntity<>(customerService.createAccount(customerRequest),HttpStatus.CREATED);
 	}
 	
